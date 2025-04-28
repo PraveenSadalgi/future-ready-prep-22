@@ -20,21 +20,13 @@ const Index = () => {
               <p className="text-base md:text-lg text-white/90 mb-6 md:mb-8 max-w-lg mx-auto md:mx-0">
                 Master the skills employers are looking for with our comprehensive job preparation platform. Practice aptitude, technical skills, and communication to stand out from the crowd.
               </p>
-              <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
+              <div className="flex justify-center md:justify-start">
                 <Button 
                   size="lg" 
                   className="w-full sm:w-auto bg-white text-primary hover:bg-gray-100"
                   onClick={() => navigate('/register')}
                 >
                   Get Started
-                </Button>
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="w-full sm:w-auto border-white text-white hover:bg-white/10"
-                  onClick={() => navigate('/about')}
-                >
-                  Learn More
                 </Button>
               </div>
             </div>
