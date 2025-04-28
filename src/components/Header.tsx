@@ -29,7 +29,7 @@ const Header = () => {
           <Link to="/about" className={`text-gray-600 hover:text-primary ${location.pathname === '/about' ? 'font-medium text-primary' : ''}`}>
             About Us
           </Link>
-          <Link to="/courses" className={`text-gray-600 hover:text-primary ${location.pathname === '/courses' ? 'font-medium text-primary' : ''}`}>
+          <Link to="/courses" className={`text-gray-600 hover:text-primary ${location.pathname === '/courses' || location.pathname.startsWith('/course/') ? 'font-medium text-primary' : ''}`}>
             Courses
           </Link>
         </nav>

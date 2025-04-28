@@ -8,6 +8,16 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { toast } from 'sonner';
 import { registerUser } from '@/services/authService';
 import Layout from '@/components/Layout';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+
+const qualificationOptions = [
+  { value: 'high_school', label: 'High School' },
+  { value: 'bachelors', label: 'Bachelor\'s Degree' },
+  { value: 'masters', label: 'Master\'s Degree' },
+  { value: 'phd', label: 'PhD' },
+  { value: 'diploma', label: 'Diploma' },
+  { value: 'certificate', label: 'Certificate Course' },
+];
 
 const Register = () => {
   const navigate = useNavigate();
@@ -15,13 +25,14 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [qualification, setQualification] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Form validation
-    if (!name || !email || !password || !confirmPassword) {
+    if (!name || !email || !password || !confirmPassword || !qualification) {
       toast.error('Please fill in all fields');
       return;
     }
@@ -38,7 +49,7 @@ const Register = () => {
     
     try {
       setIsLoading(true);
-      const response = await registerUser({ name, email, password });
+      const response = await registerUser({ name, email, password, qualification });
       
       if (response.success) {
         toast.success('Registration successful! Please log in.');
@@ -87,6 +98,25 @@ const Register = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="qualification">Highest Qualification</Label>
+                <Select 
+                  value={qualification} 
+                  onValueChange={setQualification}
+                  required
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select your qualification" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {qualificationOptions.map(option => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>

@@ -13,6 +13,9 @@ import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useEffect } from "react";
 import axios from "axios";
+import Courses from "./pages/Courses";
+import CourseDetail from "./pages/CourseDetail";
+import MockTest from "./pages/MockTest";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +63,30 @@ const App = () => {
               element={
                 <ProtectedRoute>
                   <Dashboard />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/courses" 
+              element={
+                <ProtectedRoute>
+                  <Courses />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/course/:courseId" 
+              element={
+                <ProtectedRoute>
+                  <CourseDetail />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/mock-test/:testId" 
+              element={
+                <ProtectedRoute>
+                  <MockTest />
                 </ProtectedRoute>
               } 
             />
