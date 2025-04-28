@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,12 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				brand: {
+					purple: "#8B5CF6",
+					blue: "#0EA5E9",
+					"light-blue": "#38BDF8",
+					"dark-blue": "#1E40AF"
 				}
 			},
 			borderRadius: {
@@ -89,7 +96,11 @@ export default {
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+			},
+			backgroundImage: {
+				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+				'hero-pattern': 'linear-gradient(135deg, rgba(147,51,234,0.8) 0%, rgba(59,130,246,0.8) 100%)',
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
