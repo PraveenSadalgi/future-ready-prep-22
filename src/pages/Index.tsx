@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -11,20 +10,20 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="bg-hero-pattern py-24 relative">
+      <section className="bg-hero-pattern py-12 md:py-24 relative">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center">
-            <div className="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="w-full md:w-1/2 text-center md:text-left">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6">
                 Prepare for Your Dream Job
               </h1>
-              <p className="text-lg text-white/90 mb-8 max-w-lg">
+              <p className="text-base md:text-lg text-white/90 mb-6 md:mb-8 max-w-lg mx-auto md:mx-0">
                 Master the skills employers are looking for with our comprehensive job preparation platform. Practice aptitude, technical skills, and communication to stand out from the crowd.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
                 <Button 
                   size="lg" 
-                  className="bg-white text-primary hover:bg-gray-100"
+                  className="w-full sm:w-auto bg-white text-primary hover:bg-gray-100"
                   onClick={() => navigate('/register')}
                 >
                   Get Started
@@ -32,18 +31,18 @@ const Index = () => {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-white text-white hover:bg-white/10 hover:text-white"
+                  className="w-full sm:w-auto border-white text-white hover:bg-white/10"
                   onClick={() => navigate('/about')}
                 >
                   Learn More
                 </Button>
               </div>
             </div>
-            <div className="md:w-1/2 relative flex justify-center">
+            <div className="w-full md:w-1/2 relative flex justify-center">
               <img 
                 src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=500&q=80"
                 alt="Students studying" 
-                className="rounded-lg shadow-2xl"
+                className="rounded-lg shadow-2xl w-full max-w-[500px] h-auto"
               />
             </div>
           </div>
@@ -51,16 +50,16 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-white">
+      <section className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Why Choose FutureReady?</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Why Choose FutureReady?</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-sm md:text-base">
               Our comprehensive platform offers everything you need to prepare for your dream job
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {/* Feature 1 */}
             <div className="bg-white rounded-lg p-8 shadow-md border border-gray-100 transition-all hover:shadow-lg">
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
@@ -104,16 +103,16 @@ const Index = () => {
       </section>
       
       {/* Course Preview Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-12 md:py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Popular Courses</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Popular Courses</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-sm md:text-base">
               Explore our most popular courses to kickstart your job preparation
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {/* Course 1 */}
             <div className="bg-white rounded-lg overflow-hidden shadow-md transition-all hover:shadow-lg">
               <img 
@@ -199,11 +198,12 @@ const Index = () => {
             </div>
           </div>
           
-          <div className="text-center mt-10">
+          <div className="text-center mt-8 md:mt-10">
             <Button 
               size="lg" 
               variant="outline" 
               onClick={() => navigate('/courses')}
+              className="w-full sm:w-auto"
             >
               View All Courses
             </Button>
@@ -212,15 +212,15 @@ const Index = () => {
       </section>
       
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-brand-purple to-brand-blue text-white">
+      <section className="py-12 md:py-16 bg-gradient-to-r from-brand-purple to-brand-blue text-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Accelerate Your Career?</h2>
-          <p className="text-white/90 max-w-2xl mx-auto mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Ready to Accelerate Your Career?</h2>
+          <p className="text-white/90 max-w-2xl mx-auto mb-6 md:mb-8 text-sm md:text-base">
             Join thousands of job seekers who have transformed their careers with FutureReady.
           </p>
           <Button 
             size="lg" 
-            className="bg-white text-primary hover:bg-gray-100"
+            className="w-full sm:w-auto bg-white text-primary hover:bg-gray-100"
             onClick={() => navigate('/register')}
           >
             Get Started for Free
