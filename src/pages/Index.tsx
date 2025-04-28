@@ -32,7 +32,7 @@ const Index = () => {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-white text-white hover:bg-white/10"
+                  className="border-white text-white hover:bg-white/10 hover:text-white"
                   onClick={() => navigate('/about')}
                 >
                   Learn More
@@ -131,7 +131,13 @@ const Index = () => {
                 </p>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-500">12 lessons • 10 hours</span>
-                  <Button variant="outline" size="sm">View Course</Button>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => navigate('/courses')}
+                  >
+                    View Course
+                  </Button>
                 </div>
               </div>
             </div>
@@ -153,7 +159,13 @@ const Index = () => {
                 </p>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-500">20 lessons • 15 hours</span>
-                  <Button variant="outline" size="sm">View Course</Button>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => navigate('/courses')}
+                  >
+                    View Course
+                  </Button>
                 </div>
               </div>
             </div>
@@ -175,7 +187,13 @@ const Index = () => {
                 </p>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-500">8 lessons • 6 hours</span>
-                  <Button variant="outline" size="sm">View Course</Button>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => navigate('/courses')}
+                  >
+                    View Course
+                  </Button>
                 </div>
               </div>
             </div>
@@ -235,10 +253,58 @@ const Index = () => {
             </div>
             <div className="md:w-1/2 flex justify-center">
               <img 
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
+                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
                 alt="Team working together" 
                 className="rounded-lg shadow-lg"
               />
+            </div>
+          </div>
+
+          {/* Team Section */}
+          <div className="mt-20">
+            <h3 className="text-2xl font-semibold mb-8 text-center">Our Leadership Team</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* CEO */}
+              <div className="bg-white rounded-lg shadow-md p-6 text-center">
+                <img 
+                  src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80"
+                  alt="CEO" 
+                  className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
+                />
+                <h4 className="text-xl font-semibold">Sarah Johnson</h4>
+                <p className="text-primary font-medium mb-2">Chief Executive Officer</p>
+                <p className="text-gray-600 text-sm">
+                  With 15+ years in education technology, Sarah leads our vision to transform job preparation.
+                </p>
+              </div>
+              
+              {/* CTO */}
+              <div className="bg-white rounded-lg shadow-md p-6 text-center">
+                <img 
+                  src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80"
+                  alt="CTO" 
+                  className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
+                />
+                <h4 className="text-xl font-semibold">Michael Chen</h4>
+                <p className="text-primary font-medium mb-2">Chief Technology Officer</p>
+                <p className="text-gray-600 text-sm">
+                  Michael oversees our technical strategy and ensures our platform delivers an exceptional learning experience.
+                </p>
+              </div>
+              
+              {/* COO */}
+              <div className="bg-white rounded-lg shadow-md p-6 text-center">
+                <img 
+                  src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80"
+                  alt="COO" 
+                  className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
+                />
+                <h4 className="text-xl font-semibold">Priya Sharma</h4>
+                <p className="text-primary font-medium mb-2">Chief Operating Officer</p>
+                <p className="text-gray-600 text-sm">
+                  Priya leads our day-to-day operations and ensures we continuously improve our educational offerings.
+                </p>
+              </div>
             </div>
           </div>
         </div>

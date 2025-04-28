@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { BookOpen, Code, MessageSquare } from 'lucide-react';
 import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
 
 interface Course {
   id: string;
@@ -158,14 +160,14 @@ const Courses = () => {
                   <span>{course.lessons} lessons</span>
                   <span>{course.duration}</span>
                 </div>
-                <button 
+                <Button 
                   onClick={() => navigate(`/course/${course.id}`)}
                   className="bg-primary text-white w-full py-2 px-4 rounded-md hover:bg-primary/90 transition-colors"
                 >
                   {user?.completedCourses?.includes(course.id) 
                     ? 'Continue Learning' 
                     : 'Start Course'}
-                </button>
+                </Button>
               </CardContent>
             </Card>
           ))}
