@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -96,6 +97,7 @@ const MockTest = () => {
   const [testComplete, setTestComplete] = useState(false);
   const [score, setScore] = useState(0);
   const [testStarted, setTestStarted] = useState(false);
+  const [questions, setQuestions] = useState<any[]>([]);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['mockTests'],
@@ -121,8 +123,6 @@ const MockTest = () => {
   const shuffleQuestions = (questions: any[]) => {
     return [...questions].sort(() => Math.random() - 0.5);
   };
-
-  const questions = testId ? mockQuestions[testId as keyof typeof mockQuestions] || [] : [];
 
   if (isLoading || !test) {
     return (
@@ -301,64 +301,66 @@ const MockTest = () => {
             </CardContent>
           </Card>
         ) : (
-          <div className="mb-6">
-            <Progress value={progress} className="h-2" />
-            <div className="flex justify-between mt-2 text-sm text-gray-600">
-              <span>Question {currentQuestionIndex + 1} of {questions.length}</span>
-              <span>Progress: {progress.toFixed(0)}%</span>
+          <>
+            <div className="mb-6">
+              <Progress value={progress} className="h-2" />
+              <div className="flex justify-between mt-2 text-sm text-gray-600">
+                <span>Question {currentQuestionIndex + 1} of {questions.length}</span>
+                <span>Progress: {progress.toFixed(0)}%</span>
+              </div>
             </div>
-          </div>
 
-          <Card className="mb-8">
-            <CardContent className="p-6">
-              {currentQuestion ? (
-                <div>
-                  <h2 className="text-xl font-semibold mb-6">{currentQuestion.question}</h2>
-                  
-                  <RadioGroup 
-                    value={answers[currentQuestion.id] || ''} 
-                    onValueChange={(value) => handleAnswerSelect(currentQuestion.id, value)}
-                    className="space-y-4"
+            <Card className="mb-8">
+              <CardContent className="p-6">
+                {currentQuestion ? (
+                  <div>
+                    <h2 className="text-xl font-semibold mb-6">{currentQuestion.question}</h2>
+                    
+                    <RadioGroup 
+                      value={answers[currentQuestion.id] || ''} 
+                      onValueChange={(value) => handleAnswerSelect(currentQuestion.id, value)}
+                      className="space-y-4"
+                    >
+                      {currentQuestion.options.map((option: string, index: number) => (
+                        <div key={index} className="flex items-center space-x-2 rounded-lg border p-4 hover:bg-muted/50 cursor-pointer">
+                          <RadioGroupItem value={option} id={`option-${index}`} />
+                          <Label htmlFor={`option-${index}`} className="flex-grow cursor-pointer">
+                            {option}
+                          </Label>
+                        </div>
+                      ))}
+                    </RadioGroup>
+                  </div>
+                ) : (
+                  <p>No questions available for this test.</p>
+                )}
+              </CardContent>
+              <CardFooter className="flex justify-between">
+                <Button 
+                  variant="outline" 
+                  onClick={handlePreviousQuestion}
+                  disabled={currentQuestionIndex === 0}
+                >
+                  Previous
+                </Button>
+                
+                {currentQuestionIndex < questions.length - 1 ? (
+                  <Button 
+                    onClick={handleNextQuestion}
                   >
-                    {currentQuestion.options.map((option, index) => (
-                      <div key={index} className="flex items-center space-x-2 rounded-lg border p-4 hover:bg-muted/50 cursor-pointer">
-                        <RadioGroupItem value={option} id={`option-${index}`} />
-                        <Label htmlFor={`option-${index}`} className="flex-grow cursor-pointer">
-                          {option}
-                        </Label>
-                      </div>
-                    ))}
-                  </RadioGroup>
-                </div>
-              ) : (
-                <p>No questions available for this test.</p>
-              )}
-            </CardContent>
-            <CardFooter className="flex justify-between">
-              <Button 
-                variant="outline" 
-                onClick={handlePreviousQuestion}
-                disabled={currentQuestionIndex === 0}
-              >
-                Previous
-              </Button>
-              
-              {currentQuestionIndex < questions.length - 1 ? (
-                <Button 
-                  onClick={handleNextQuestion}
-                >
-                  Next
-                </Button>
-              ) : (
-                <Button 
-                  onClick={handleSubmitTest}
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Submitting...' : 'Submit Test'}
-                </Button>
-              )}
-            </CardFooter>
-          </Card>
+                    Next
+                  </Button>
+                ) : (
+                  <Button 
+                    onClick={handleSubmitTest}
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Submitting...' : 'Submit Test'}
+                  </Button>
+                )}
+              </CardFooter>
+            </Card>
+          </>
         )}
       </div>
     </Layout>
