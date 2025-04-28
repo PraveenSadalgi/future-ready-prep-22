@@ -52,10 +52,16 @@ const Register = () => {
       const response = await registerUser({ name, email, password, qualification });
       
       if (response.success) {
+        // Store user data in localStorage
+        localStorage.setItem('userData', JSON.stringify({ 
+          name, 
+          email,
+          qualification 
+        }));
+        
         toast.success('Registration successful! Please log in.');
         navigate('/login');
       } else if (response.message) {
-        // Show the specific error message from the server
         toast.error(response.message);
       }
     } catch (error) {
