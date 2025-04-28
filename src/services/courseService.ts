@@ -1,110 +1,69 @@
-
 import axios from 'axios';
 
 const API_URL = 'https://api.futureready.com'; // Will be replaced with actual backend URL when developed
 
-// For development, this will mock the courses data
+// Updated mock courses with qualification suggestions
 const mockCourses = [
   {
     id: 'aptitude-basics',
     title: 'Aptitude Basics',
     description: 'Master the fundamentals of quantitative aptitude with comprehensive lessons and practice problems.',
     category: 'Aptitude',
+    qualification: ['high_school', 'bachelors', 'masters', 'diploma'],
     duration: '10 hours',
     lessons: 12,
     image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500',
     videoLink: 'https://www.youtube.com/embed/JQBRzsPhw2w',
+    thumbnail: 'https://img.youtube.com/vi/JQBRzsPhw2w/maxresdefault.jpg'
   },
   {
-    id: 'logical-reasoning',
-    title: 'Logical Reasoning',
-    description: 'Develop critical thinking and problem-solving skills with logical reasoning exercises and techniques.',
-    category: 'Aptitude',
+    id: 'communication-skills',
+    title: 'Professional Communication Skills',
+    description: 'Enhance your communication skills with practical examples and exercises.',
+    category: 'Communication',
+    qualification: ['bachelors', 'masters', 'diploma'],
     duration: '8 hours',
     lessons: 10,
-    image: 'https://images.unsplash.com/photo-1509228627152-72ae9ae6848d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500',
-    videoLink: 'https://www.youtube.com/embed/Yk1HipdhdCc',
+    image: 'https://images.unsplash.com/photo-1552581234-26160f608093?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500',
+    videoLink: 'https://www.youtube.com/embed/8WiDHJ5mJos',
+    thumbnail: 'https://img.youtube.com/vi/8WiDHJ5mJos/maxresdefault.jpg'
   },
   {
-    id: 'coding-interview-prep',
-    title: 'Coding Interview Prep',
-    description: 'Prepare for technical interviews with data structures, algorithms and common coding problems.',
+    id: 'technical-interview',
+    title: 'Technical Interview Preparation',
+    description: 'Master data structures, algorithms and system design concepts.',
     category: 'Technical',
+    qualification: ['bachelors', 'masters'],
     duration: '15 hours',
     lessons: 20,
     image: 'https://images.unsplash.com/photo-1555099962-4199c345e5dd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500',
     videoLink: 'https://www.youtube.com/embed/8hly31xKli0',
-  },
-  {
-    id: 'effective-communication',
-    title: 'Effective Communication',
-    description: 'Enhance your verbal and written communication skills for professional success.',
-    category: 'Communication',
-    duration: '6 hours',
-    lessons: 8,
-    image: 'https://images.unsplash.com/photo-1552581234-26160f608093?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500',
-    videoLink: 'https://www.youtube.com/embed/8WiDHJ5mJos',
-  },
-  {
-    id: 'system-design',
-    title: 'System Design Fundamentals',
-    description: 'Learn how to design scalable systems and ace the system design interview.',
-    category: 'Technical',
-    duration: '12 hours',
-    lessons: 15,
-    image: 'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500',
-    videoLink: 'https://www.youtube.com/embed/SqcXvc3ZmRU',
-  },
-  {
-    id: 'group-discussions',
-    title: 'Group Discussion Skills',
-    description: 'Master the art of group discussions with practical techniques and mock sessions.',
-    category: 'Communication',
-    duration: '5 hours',
-    lessons: 7,
-    image: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500',
-    videoLink: 'https://www.youtube.com/embed/YvYYzgmaqrM',
-  },
+    thumbnail: 'https://img.youtube.com/vi/8hly31xKli0/maxresdefault.jpg'
+  }
 ];
 
-// For development, this will mock the mock tests data
+// Updated mock tests with qualification requirements
 const mockTests = [
   {
-    id: 'aptitude-test-1',
-    title: 'Aptitude Test 1',
-    description: 'Test your quantitative aptitude skills with this comprehensive assessment.',
-    duration: '60 minutes',
-    questions: 30,
-    difficulty: 'Beginner',
-    category: 'Aptitude',
-  },
-  {
-    id: 'coding-challenge-1',
-    title: 'Coding Challenge 1',
-    description: 'Solve programming problems ranging from easy to medium difficulty.',
-    duration: '90 minutes',
-    questions: 5,
-    difficulty: 'Intermediate',
-    category: 'Technical',
-  },
-  {
-    id: 'communication-assessment',
-    title: 'Communication Assessment',
-    description: 'Evaluate your verbal reasoning and written communication abilities.',
+    id: 'aptitude-test-basic',
+    title: 'Basic Aptitude Test',
+    description: 'Test your fundamental quantitative and logical reasoning skills.',
     duration: '45 minutes',
     questions: 25,
     difficulty: 'Beginner',
-    category: 'Communication',
+    category: 'Aptitude',
+    qualification: ['high_school', 'bachelors', 'masters', 'diploma'],
   },
   {
-    id: 'advanced-aptitude',
-    title: 'Advanced Aptitude',
-    description: 'Challenge yourself with complex aptitude problems from past company tests.',
-    duration: '75 minutes',
-    questions: 35,
-    difficulty: 'Advanced',
-    category: 'Aptitude',
-  },
+    id: 'technical-mcq',
+    title: 'Technical MCQ Test',
+    description: 'Multiple choice questions covering programming fundamentals.',
+    duration: '60 minutes',
+    questions: 30,
+    difficulty: 'Intermediate',
+    category: 'Technical',
+    qualification: ['bachelors', 'masters'],
+  }
 ];
 
 // Mock leaderboard data

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,10 +13,12 @@ interface Course {
   title: string;
   description: string;
   category: string;
+  qualification: string[];
   duration: string;
   lessons: number;
   image: string;
   videoLink: string;
+  thumbnail: string;
 }
 
 const Courses = () => {
@@ -76,9 +77,11 @@ const Courses = () => {
   const courses = data?.courses || [];
   const categories = ['All', ...new Set(courses.map((course: Course) => course.category))];
   
-  const filteredCourses = activeCategory === 'All' 
-    ? courses 
-    : courses.filter((course: Course) => course.category === activeCategory);
+  const filteredCourses = data?.courses.filter((course: Course) => {
+    const matchesCategory = activeCategory === 'All' || course.category === activeCategory;
+    const matchesQualification = !user?.qualification || course.qualification.includes(user.qualification);
+    return matchesCategory && matchesQualification;
+  }) || [];
 
   const getCategoryIcon = (category: string) => {
     switch(category) {
@@ -96,8 +99,8 @@ const Courses = () => {
   return (
     <Layout>
       <div className="container mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold mb-2">Courses</h1>
-        <p className="text-gray-600 mb-8">Explore our courses to enhance your job preparation skills</p>
+        <h1 className="text-3xl font-bold mb-2">Recommended Courses</h1>
+        <p className="text-gray-600 mb-8">Courses tailored to your qualification and interests</p>
         
         <div className="mb-8">
           <Tabs defaultValue="All" onValueChange={setActiveCategory}>
@@ -115,14 +118,35 @@ const Courses = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {filteredCourses.map((course: Course) => (
             <Card key={course.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-              <img 
-                src={course.image} 
-                alt={course.title} 
-                className="w-full h-48 object-cover"
-              />
+              <div className="relative h-48">
+                {course.videoLink.includes('youtube.com') ? (
+                  <img 
+                    src={course.thumbnail}
+                    alt={course.title}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <img 
+                    src={course.image}
+                    alt={course.title}
+                    className="w-full h-full object-cover"
+                  />
+                )}
+                {course.videoLink.includes('youtube.com') && (
+                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                    <svg
+                      className="w-12 h-12 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                )}
+              </div>
               <CardHeader className="p-6">
                 <div className="flex justify-between items-start mb-2">
-                  <CardTitle>{course.title}</CardTitle>
+                  <CardTitle className="text-xl">{course.title}</CardTitle>
                   <span className="bg-primary/10 text-primary text-xs px-2 py-1 rounded">
                     {course.category}
                   </span>

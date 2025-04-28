@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 
 const API_URL = 'https://api.futureready.com'; // Will be replaced with actual backend URL when developed
@@ -7,6 +6,7 @@ interface RegisterData {
   name: string;
   email: string;
   password: string;
+  qualification: string;
 }
 
 interface LoginData {
@@ -26,6 +26,7 @@ const mockRegister = async (data: RegisterData) => {
       id: 'user_' + Math.random().toString(36).substr(2, 9),
       name: data.name,
       email: data.email,
+      qualification: data.qualification,
       points: 0,
       completedCourses: [],
     },
