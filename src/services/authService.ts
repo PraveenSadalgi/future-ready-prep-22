@@ -1,4 +1,5 @@
 
+import { User, ApiResponse } from '../types';
 import axios from 'axios';
 
 interface RegisterCredentials {
@@ -13,7 +14,7 @@ interface LoginCredentials {
   password: string;
 }
 
-export const registerUser = async (userData: RegisterCredentials) => {
+export const registerUser = async (userData: RegisterCredentials): Promise<ApiResponse> => {
   try {
     // For development without a backend
     // Simulating a successful registration
@@ -24,7 +25,7 @@ export const registerUser = async (userData: RegisterCredentials) => {
     // return response.data;
     
     // Simulate successful registration
-    const mockUser = {
+    const mockUser: User = {
       id: `user-${Date.now()}`,
       name: userData.name,
       email: userData.email,
@@ -56,7 +57,7 @@ export const registerUser = async (userData: RegisterCredentials) => {
   }
 };
 
-export const loginUser = async (credentials: LoginCredentials) => {
+export const loginUser = async (credentials: LoginCredentials): Promise<ApiResponse> => {
   try {
     // For development without a backend
     // Simulating a successful login
@@ -69,7 +70,7 @@ export const loginUser = async (credentials: LoginCredentials) => {
     // Mock validation
     if (credentials.email && credentials.password) {
       // Create mock user data
-      const mockUser = {
+      const mockUser: User = {
         id: `user-${Date.now()}`,
         name: 'Test User',
         email: credentials.email,
@@ -103,6 +104,42 @@ export const loginUser = async (credentials: LoginCredentials) => {
     return {
       success: false,
       message: 'Login failed. Please try again.'
+    };
+  }
+};
+
+// Convert the JavaScript file to TypeScript
+export const generateToken = (id: string): string => {
+  // In a real app, this would use JWT to generate a token
+  return `mock-jwt-token-${id}-${Date.now()}`;
+};
+
+export const getUserProfile = async (): Promise<ApiResponse> => {
+  try {
+    // In a real app, this would be a real API call to your backend
+    // const response = await axios.get('/api/users/profile');
+    // return response.data;
+    
+    // Get user from localStorage
+    const userJSON = localStorage.getItem('user');
+    if (!userJSON) {
+      return {
+        success: false,
+        message: 'Not authenticated'
+      };
+    }
+    
+    const user = JSON.parse(userJSON);
+    
+    return {
+      success: true,
+      user
+    };
+  } catch (error) {
+    console.error('Get profile error:', error);
+    return {
+      success: false,
+      message: 'Failed to fetch user profile'
     };
   }
 };
