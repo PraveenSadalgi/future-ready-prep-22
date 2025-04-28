@@ -39,3 +39,4 @@ export const protect = async (req: AuthRequest, res: Response, next: NextFunctio
     throw new Error('Not authorized, no token');
   }
 };
+

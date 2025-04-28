@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -110,11 +109,8 @@ const MockTest = () => {
       if (foundTest) {
         setTest(foundTest);
         if (testId && mockQuestions[testId as keyof typeof mockQuestions]) {
-          // Get all questions for this test
           const testQuestions = mockQuestions[testId as keyof typeof mockQuestions];
-          // Randomly select questions if there are more available than needed
           const shuffledQuestions = shuffleQuestions(testQuestions);
-          // Take only the number of questions specified in the test configuration
           const selectedQuestions = shuffledQuestions.slice(0, foundTest.questions);
           setQuestions(selectedQuestions);
         }
@@ -308,7 +304,11 @@ const MockTest = () => {
         ) : (
           <>
             <div className="mb-6">
-              <Progress value={progress} className="h-2" />
+              <Progress 
+                value={progress} 
+                className="h-2"
+                max={100}
+              />
               <div className="flex justify-between mt-2 text-sm text-gray-600">
                 <span>Question {currentQuestionIndex + 1} of {questions.length}</span>
                 <span>Progress: {progress.toFixed(0)}%</span>
