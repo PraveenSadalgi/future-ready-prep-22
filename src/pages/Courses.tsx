@@ -9,8 +9,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { BookOpen, Code, MessageSquare } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
+import { Course } from '@/types';
 
-interface Course {
+interface CourseData {
   id: string;
   title: string;
   description: string;
@@ -77,9 +78,9 @@ const Courses = () => {
   }
 
   const courses = data?.courses || [];
-  const categories = ['All', ...new Set(courses.map((course: Course) => course.category))];
+  const categories = ['All', ...new Set(courses.map((course: CourseData) => course.category))];
   
-  const filteredCourses = data?.courses.filter((course: Course) => {
+  const filteredCourses = data?.courses.filter((course: CourseData) => {
     const matchesCategory = activeCategory === 'All' || course.category === activeCategory;
     const matchesQualification = !user?.qualification || course.qualification.includes(user.qualification);
     return matchesCategory && matchesQualification;
@@ -107,7 +108,7 @@ const Courses = () => {
         <div className="mb-8">
           <Tabs defaultValue="All" onValueChange={setActiveCategory}>
             <TabsList className="mb-4">
-              {categories.map((category) => (
+              {categories.map((category: string) => (
                 <TabsTrigger key={category} value={category} className="flex items-center">
                   {getCategoryIcon(category)}
                   {category}
@@ -118,10 +119,10 @@ const Courses = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {filteredCourses.map((course: Course) => (
+          {filteredCourses.map((course: CourseData) => (
             <Card key={course.id} className="overflow-hidden hover:shadow-lg transition-shadow">
               <div className="relative h-48">
-                {course.videoLink.includes('youtube.com') ? (
+                {course.videoLink && course.videoLink.includes('youtube.com') ? (
                   <img 
                     src={course.thumbnail}
                     alt={course.title}
@@ -134,7 +135,7 @@ const Courses = () => {
                     className="w-full h-full object-cover"
                   />
                 )}
-                {course.videoLink.includes('youtube.com') && (
+                {course.videoLink && course.videoLink.includes('youtube.com') && (
                   <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                     <svg
                       className="w-12 h-12 text-white"
