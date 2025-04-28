@@ -15,9 +15,22 @@ interface LoginData {
 }
 
 // For development, this will mock the API responses
+const existingUsers = new Set<string>();
+
 const mockRegister = async (data: RegisterData) => {
   // Simulate API call
   await new Promise(resolve => setTimeout(resolve, 1000));
+  
+  // Check if email already exists
+  if (existingUsers.has(data.email)) {
+    return {
+      success: false,
+      message: 'An account with this email already exists.',
+    };
+  }
+  
+  // If email doesn't exist, add it to our set
+  existingUsers.add(data.email);
   
   // Mock successful registration
   return {
