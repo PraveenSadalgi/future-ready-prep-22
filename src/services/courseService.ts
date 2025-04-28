@@ -42,25 +42,170 @@ const mockCourses = [
   }
 ];
 
+const mockQuestions = {
+  'aptitude-test-1': [
+    {
+      id: 'q1',
+      question: 'If a train travels at 60 km/h, how far will it travel in 2.5 hours?',
+      options: ['120 km', '150 km', '180 km', '200 km'],
+      answer: '150 km'
+    },
+    {
+      id: 'q2',
+      question: 'Find the next number in the sequence: 2, 5, 10, 17, 26, ...',
+      options: ['35', '36', '37', '38'],
+      answer: '37'
+    },
+    {
+      id: 'q3',
+      question: 'If 6 workers can build a wall in 12 days, how many days will it take 9 workers to build the same wall?',
+      options: ['8', '6', '9', '18'],
+      answer: '8'
+    },
+    {
+      id: 'q4',
+      question: 'A shopkeeper sells an item at 20% profit. If the cost price is Rs. 1500, what is the selling price?',
+      options: ['Rs. 1700', 'Rs. 1800', 'Rs. 1900', 'Rs. 2000'],
+      answer: 'Rs. 1800'
+    },
+    {
+      id: 'q5',
+      question: 'What is the probability of getting a sum of 7 when two dice are rolled?',
+      options: ['1/6', '1/9', '1/12', '5/36'],
+      answer: '1/6'
+    }
+  ],
+  'basic-coding-test': [
+    {
+      id: 'q1',
+      question: 'What is the output of: console.log(typeof [])?',
+      options: ['array', 'object', 'undefined', 'null'],
+      answer: 'object'
+    },
+    {
+      id: 'q2',
+      question: 'Which method is used to add an element at the end of an array?',
+      options: ['push()', 'pop()', 'shift()', 'unshift()'],
+      answer: 'push()'
+    },
+    {
+      id: 'q3',
+      question: 'What does CSS stand for?',
+      options: ['Computer Style Sheets', 'Cascading Style Sheets', 'Creative Style Sheets', 'Colorful Style Sheets'],
+      answer: 'Cascading Style Sheets'
+    }
+  ],
+  'advanced-dsa': [
+    {
+      id: 'q1',
+      question: 'What is the time complexity of quicksort in the average case?',
+      options: ['O(n)', 'O(n log n)', 'O(n²)', 'O(log n)'],
+      answer: 'O(n log n)'
+    },
+    {
+      id: 'q2',
+      question: 'Which data structure is best suited for implementing a priority queue?',
+      options: ['Array', 'Linked List', 'Heap', 'Stack'],
+      answer: 'Heap'
+    },
+    {
+      id: 'q3',
+      question: 'What is the space complexity of DFS (Depth-First Search)?',
+      options: ['O(1)', 'O(n)', 'O(V+E)', 'O(b^d)'],
+      answer: 'O(V+E)'
+    }
+  ],
+  'quantitative-aptitude': [
+    {
+      id: 'qa1',
+      question: 'What is 15% of 400?',
+      options: ['40', '60', '50', '80'],
+      answer: '60'
+    },
+    {
+      id: 'qa2',
+      question: 'A car travels at 60 kmph for 2 hours and then at 40 kmph for 3 hours. What is the average speed?',
+      options: ['48 kmph', '50 kmph', '45 kmph', '52 kmph'],
+      answer: '48 kmph'
+    },
+    {
+      id: 'qa3',
+      question: 'Find the missing number: 2, 6, 12, 20, ?',
+      options: ['30', '28', '32', '26'],
+      answer: '30'
+    }
+  ],
+  'logical-reasoning': [
+    {
+      id: 'lr1',
+      question: 'If LIVE is coded as 3957 and LOVE is coded as 3957, then CODE is coded as?',
+      options: ['8647', '8467', '6847', '4867'],
+      answer: '8647'
+    },
+    {
+      id: 'lr2',
+      question: 'In a row of children, Ravi is 7th from the left and 4th from the right. How many children are there in the row?',
+      options: ['9', '10', '11', '12'],
+      answer: '10'
+    },
+    {
+      id: 'lr3',
+      question: 'If + means ×, - means +, × means ÷ and ÷ means -, then 15 - 3 + 6 × 2 = ?',
+      options: ['24', '30', '36', '48'],
+      answer: '36'
+    }
+  ]
+};
+
 // Updated mock tests with qualification requirements
 const mockTests = [
   {
-    id: 'aptitude-test-basic',
+    id: 'aptitude-test-1',
     title: 'Basic Aptitude Test',
     description: 'Test your fundamental quantitative and logical reasoning skills.',
-    duration: '45 minutes',
-    questions: 25,
+    duration: '45',
+    questions: 5,
     difficulty: 'Beginner',
     category: 'Aptitude',
     qualification: ['high_school', 'bachelors', 'masters', 'diploma'],
   },
   {
-    id: 'technical-mcq',
-    title: 'Technical MCQ Test',
-    description: 'Multiple choice questions covering programming fundamentals.',
-    duration: '60 minutes',
-    questions: 30,
+    id: 'quantitative-aptitude',
+    title: 'Quantitative Aptitude Test',
+    description: 'Advanced mathematical and analytical problems.',
+    duration: '30',
+    questions: 3,
     difficulty: 'Intermediate',
+    category: 'Aptitude',
+    qualification: ['bachelors', 'masters'],
+  },
+  {
+    id: 'logical-reasoning',
+    title: 'Logical Reasoning Test',
+    description: 'Test your logical thinking and problem-solving abilities.',
+    duration: '45',
+    questions: 3,
+    difficulty: 'Intermediate',
+    category: 'Aptitude',
+    qualification: ['high_school', 'bachelors', 'masters'],
+  },
+  {
+    id: 'basic-coding-test',
+    title: 'Basic Coding Test',
+    description: 'Test your fundamental programming knowledge.',
+    duration: '60',
+    questions: 3,
+    difficulty: 'Intermediate',
+    category: 'Technical',
+    qualification: ['bachelors', 'masters'],
+  },
+  {
+    id: 'advanced-dsa',
+    title: 'Advanced DSA Test',
+    description: 'Complex data structures and algorithms problems.',
+    duration: '90',
+    questions: 3,
+    difficulty: 'Advanced',
     category: 'Technical',
     qualification: ['bachelors', 'masters'],
   }

@@ -110,8 +110,13 @@ const MockTest = () => {
       if (foundTest) {
         setTest(foundTest);
         if (testId && mockQuestions[testId as keyof typeof mockQuestions]) {
-          const shuffledQuestions = shuffleQuestions(mockQuestions[testId as keyof typeof mockQuestions]);
-          setQuestions(shuffledQuestions);
+          // Get all questions for this test
+          const testQuestions = mockQuestions[testId as keyof typeof mockQuestions];
+          // Randomly select questions if there are more available than needed
+          const shuffledQuestions = shuffleQuestions(testQuestions);
+          // Take only the number of questions specified in the test configuration
+          const selectedQuestions = shuffledQuestions.slice(0, foundTest.questions);
+          setQuestions(selectedQuestions);
         }
       } else {
         toast.error('Test not found');
@@ -278,7 +283,7 @@ const MockTest = () => {
             </div>
             {testStarted && (
               <TestTimer 
-                duration={45} 
+                duration={parseInt(test?.duration)} 
                 onTimeUp={handleTimeUp}
               />
             )}
