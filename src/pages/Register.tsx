@@ -54,12 +54,17 @@ const Register = () => {
       if (response.success) {
         toast.success('Registration successful! Please log in.');
         navigate('/login');
-      } else {
-        toast.error(response.message || 'Registration failed');
+      } else if (response.message) {
+        // Show the specific error message from the server
+        toast.error(response.message);
       }
     } catch (error) {
-      toast.error('Registration failed. Please try again.');
-      console.error('Registration error:', error);
+      // Only show generic error if we can't get a specific message
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error('An unexpected error occurred. Please try again.');
+      }
     } finally {
       setIsLoading(false);
     }
