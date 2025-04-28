@@ -28,9 +28,9 @@ export interface Course {
 // Mock Test Types
 export interface Question {
   id: string;
-  text: string;
+  question: string;  // Changed from text to question to match our implementation
   options: string[];
-  correctAnswer: number;
+  answer: string;    // Changed from correctAnswer to answer to match our implementation
 }
 
 export interface MockTest {

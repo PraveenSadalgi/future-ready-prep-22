@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -10,6 +11,14 @@ import { toast } from 'sonner';
 import Layout from '@/components/Layout';
 import TestTimer from '@/components/TestTimer';
 import { getMockTests, submitMockTest } from '@/services/courseService';
+
+// Define the structure of our question objects
+interface Question {
+  id: string;
+  question: string;  // Changed from 'text' to match our mockQuestions structure
+  options: string[];
+  answer: string;    // Changed from 'correctAnswer' to match our mockQuestions structure
+}
 
 const mockQuestions = {
   'aptitude-test-1': [
@@ -96,7 +105,7 @@ const MockTest = () => {
   const [testComplete, setTestComplete] = useState(false);
   const [score, setScore] = useState(0);
   const [testStarted, setTestStarted] = useState(false);
-  const [questions, setQuestions] = useState<any[]>([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['mockTests'],
