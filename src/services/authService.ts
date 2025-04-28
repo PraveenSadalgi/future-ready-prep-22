@@ -1,132 +1,108 @@
 
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/users';
-
-interface RegisterData {
+interface RegisterCredentials {
   name: string;
   email: string;
   password: string;
   qualification: string;
 }
 
-interface LoginData {
+interface LoginCredentials {
   email: string;
   password: string;
 }
 
-export const registerUser = async (data: RegisterData) => {
+export const registerUser = async (userData: RegisterCredentials) => {
   try {
-    const response = await axios.post(`${API_URL}`, data);
+    // For development without a backend
+    // Simulating a successful registration
+    console.log("Registering user with data:", userData);
+    
+    // In a real app, this would be a real API call to your backend
+    // const response = await axios.post('/api/users', userData);
+    // return response.data;
+    
+    // Simulate successful registration
+    const mockUser = {
+      id: `user-${Date.now()}`,
+      name: userData.name,
+      email: userData.email,
+      qualification: userData.qualification,
+      points: 0,
+      completedCourses: [],
+    };
+    
+    // Generate a mock token
+    const mockToken = `mock-token-${Date.now()}`;
+    
+    // Store user data in localStorage
+    localStorage.setItem('user', JSON.stringify(mockUser));
+    localStorage.setItem('token', mockToken);
+    
+    // Return success response
     return {
       success: true,
-      user: response.data,
-      message: 'Registration successful',
-    };
-  } catch (error: any) {
-    return {
-      success: false,
-      message: error.response?.data?.message || 'Registration failed',
-    };
-  }
-};
-
-export const loginUser = async (data: LoginData) => {
-  try {
-    const response = await axios.post(`${API_URL}/login`, data);
-    
-    // Store token in localStorage
-    localStorage.setItem('token', response.data.token);
-    localStorage.setItem('user', JSON.stringify(response.data));
-    
-    return {
-      success: true,
-      token: response.data.token,
-      user: response.data,
-      message: 'Login successful',
-    };
-  } catch (error: any) {
-    return {
-      success: false,
-      message: error.response?.data?.message || 'Login failed',
-    };
-  }
-};
-
-export const getProfile = async () => {
-  try {
-    const token = localStorage.getItem('token');
-    
-    if (!token) {
-      throw new Error('No authentication token found');
-    }
-    
-    const response = await axios.get(`${API_URL}/profile`, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    
-    return {
-      user: response.data
+      user: mockUser,
+      token: mockToken,
+      message: 'Registration successful!'
     };
   } catch (error) {
-    throw error;
-  }
-};
-
-export const updateProfile = async (data: { name?: string; email?: string; password?: string; qualification?: string }) => {
-  try {
-    const token = localStorage.getItem('token');
-    
-    if (!token) {
-      throw new Error('No authentication token found');
-    }
-    
-    const response = await axios.put(`${API_URL}/profile`, data, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    
-    // Update localStorage with new user data
-    localStorage.setItem('user', JSON.stringify(response.data));
-    
-    return {
-      success: true,
-      user: response.data,
-    };
-  } catch (error: any) {
+    console.error('Registration error:', error);
     return {
       success: false,
-      message: error.response?.data?.message || 'Update failed',
+      message: 'Registration failed. Please try again.'
     };
   }
 };
 
-export const updateUserProgress = async (data: { points?: number; courseId?: string }) => {
+export const loginUser = async (credentials: LoginCredentials) => {
   try {
-    const token = localStorage.getItem('token');
+    // For development without a backend
+    // Simulating a successful login
+    console.log("Logging in user with credentials:", credentials);
     
-    if (!token) {
-      throw new Error('No authentication token found');
+    // In a real app, this would be a real API call to your backend
+    // const response = await axios.post('/api/users/login', credentials);
+    // return response.data;
+    
+    // Mock validation
+    if (credentials.email && credentials.password) {
+      // Create mock user data
+      const mockUser = {
+        id: `user-${Date.now()}`,
+        name: 'Test User',
+        email: credentials.email,
+        qualification: 'Bachelor\'s Degree',
+        points: 250,
+        completedCourses: ['course-1', 'course-3'],
+      };
+      
+      // Generate a mock token
+      const mockToken = `mock-token-${Date.now()}`;
+      
+      // Store user data in localStorage
+      localStorage.setItem('user', JSON.stringify(mockUser));
+      localStorage.setItem('token', mockToken);
+      
+      // Return success response
+      return {
+        success: true,
+        user: mockUser,
+        token: mockToken,
+        message: 'Login successful!'
+      };
+    } else {
+      return {
+        success: false,
+        message: 'Invalid email or password'
+      };
     }
-    
-    const response = await axios.put(`${API_URL}/update-progress`, data, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    
-    // Update user data in localStorage
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    user.points = response.data.points;
-    user.completedCourses = response.data.completedCourses;
-    localStorage.setItem('user', JSON.stringify(user));
-    
-    return {
-      success: true,
-      pointsAwarded: data.points,
-      newTotal: response.data.points,
-    };
-  } catch (error: any) {
+  } catch (error) {
+    console.error('Login error:', error);
     return {
       success: false,
-      message: error.response?.data?.message || 'Failed to update progress',
+      message: 'Login failed. Please try again.'
     };
   }
 };

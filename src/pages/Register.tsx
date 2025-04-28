@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -48,21 +49,22 @@ const Register = () => {
     
     try {
       setIsLoading(true);
-      const response = await registerUser({ name, email, password, qualification });
+      const response = await registerUser({
+        name,
+        email,
+        password,
+        qualification
+      });
       
       if (response.success) {
-        toast.success('Registration successful! Please log in.');
-        navigate('/login');
-      } else if (response.message) {
-        toast.error(response.message);
+        toast.success('Registration successful!');
+        navigate('/dashboard');
+      } else {
+        toast.error(response.message || 'Registration failed');
       }
     } catch (error) {
-      // Only show generic error if we can't get a specific message
-      if (error instanceof Error) {
-        toast.error(error.message);
-      } else {
-        toast.error('An unexpected error occurred. Please try again.');
-      }
+      toast.error('Registration failed. Please try again.');
+      console.error('Registration error:', error);
     } finally {
       setIsLoading(false);
     }
@@ -104,16 +106,15 @@ const Register = () => {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="qualification">Highest Qualification</Label>
-                <Select 
-                  value={qualification} 
+                <Select
+                  value={qualification}
                   onValueChange={setQualification}
-                  required
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Select your qualification" />
                   </SelectTrigger>
                   <SelectContent>
-                    {qualificationOptions.map(option => (
+                    {qualificationOptions.map((option) => (
                       <SelectItem key={option.value} value={option.value}>
                         {option.label}
                       </SelectItem>
@@ -144,7 +145,7 @@ const Register = () => {
                 />
               </div>
               <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? 'Creating account...' : 'Create account'}
+                {isLoading ? 'Creating account...' : 'Create Account'}
               </Button>
             </form>
           </CardContent>
